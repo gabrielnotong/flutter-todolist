@@ -1,6 +1,10 @@
 # todolist
 
-A new Flutter application.
+A Todo list application.
+
+It contains:
+
+- Passing state from child to parent using callback
 
 ## Getting Started
 
