@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:todolist/components/task_list.dart';
 import 'package:todolist/components/task_tile.dart';
-import 'package:todolist/screens/bottom_sheet_box.dart';
+import 'package:todolist/screens/bottom_sheet_screen.dart';
 
 class TodoListScreen extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             ),
             context: context,
             builder: (BuildContext context) {
-              return BottomSheetBox(
+              return BottomSheetScreen(
                 taskController: _taskController,
                 addTask: () {
                   if (_taskController.text.length > 0) {

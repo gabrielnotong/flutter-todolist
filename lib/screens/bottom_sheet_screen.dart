@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BottomSheetBox extends StatelessWidget {
+class BottomSheetScreen extends StatelessWidget {
   final TextEditingController taskController;
   final Function addTask;
 
-  BottomSheetBox({this.taskController, this.addTask});
+  BottomSheetScreen({this.taskController, this.addTask});
 
   @override
   Widget build(BuildContext context) {
