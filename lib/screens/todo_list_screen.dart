@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:todolist/components/task_list.dart';
-import 'package:todolist/components/task_tile.dart';
+import 'package:todolist/models/task.dart';
 import 'package:todolist/screens/bottom_sheet_screen.dart';
 
 class TodoListScreen extends StatefulWidget {
@@ -11,7 +11,7 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   String typeTaskLabel;
-  List<TaskTile> taskList = [];
+  List<Task> taskList = [];
   TextEditingController _taskController = TextEditingController();
 
   @override
@@ -39,7 +39,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 addTask: () {
                   if (_taskController.text.length > 0) {
                     setState(() {
-                      taskList.add(TaskTile(label: _taskController.text));
+                      taskList.add(
+                        Task(name: _taskController.text),
+                      );
                     });
                   }
 
@@ -106,7 +108,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   ),
                 ),
                 child: TaskList(
-                  children: taskList,
+                  tasks: taskList,
                 ),
               ),
             ),
