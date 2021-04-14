@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 import 'package:todolist/components/task_list.dart';
 import 'package:todolist/models/task.dart';
+import 'package:todolist/models/tasks.dart';
 import 'package:todolist/screens/bottom_sheet_screen.dart';
 
 class TodoListScreen extends StatefulWidget {
@@ -11,7 +13,6 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   String typeTaskLabel;
-  List<Task> taskList = [];
   TextEditingController _taskController = TextEditingController();
 
   @override
@@ -22,6 +23,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int taskLength = Provider.of<Tasks>(context).size();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -39,7 +42,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 addTask: () {
                   if (_taskController.text.length > 0) {
                     setState(() {
-                      taskList.add(
+                      Provider.of<Tasks>(context, listen: false).addTask(
                         Task(name: _taskController.text),
                       );
                     });
@@ -89,7 +92,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     ),
                   ),
                   Text(
-                    '${taskList.length} task${taskList.length > 1 ? "s" : ""}',
+                    '$taskLength task${taskLength > 1 ? "s" : ""}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.0,
@@ -107,9 +110,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     topRight: Radius.circular(20.0),
                   ),
                 ),
-                child: TaskList(
-                  tasks: taskList,
-                ),
+                child: TaskList(),
               ),
             ),
           ],
