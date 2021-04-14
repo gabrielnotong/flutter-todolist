@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/models/task.dart';
+import 'package:todolist/models/task_data.dart';
 
-class BottomSheetScreen extends StatelessWidget {
-  final TextEditingController taskController;
-  final Function addTask;
-
-  BottomSheetScreen({this.taskController, this.addTask});
-
+class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String taskTitle;
+
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(40.0),
@@ -34,7 +34,9 @@ class BottomSheetScreen extends StatelessWidget {
               ),
               Container(
                 child: TextField(
-                  controller: taskController,
+                  onChanged: (String newText) {
+                    taskTitle = newText;
+                  },
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(10.0),
@@ -60,7 +62,15 @@ class BottomSheetScreen extends StatelessWidget {
                   ),
                   padding: MaterialStateProperty.all(EdgeInsets.all(15.0)),
                 ),
-                onPressed: addTask,
+                onPressed: () {
+                  if (null != taskTitle) {
+                    Provider.of<TaskData>(context, listen: false).addTask(
+                      Task(name: taskTitle),
+                    );
+                  }
+
+                  Navigator.pop(context);
+                },
               )
             ],
           ),

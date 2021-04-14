@@ -1,10 +1,18 @@
 # todolist
 
-A Todo list application.
-
 It contains:
 
 - Passing state from child to parent using callback
+
+- Using ChangeNotifierProvider to make data available in sub widgets and avoiding StatefulWidgets
+usage
+
+- Consumer usage components/task_list.dart:10
+
+- Using a data change notifier to manipulate data across the entire application
+    models/task_data.dart:6
+
+- Using GestureDetector to delete Task on long press
 
 ## Getting Started
 
