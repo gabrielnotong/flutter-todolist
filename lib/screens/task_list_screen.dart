@@ -2,28 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/components/task_list.dart';
-import 'package:todolist/models/task.dart';
-import 'package:todolist/models/tasks.dart';
-import 'package:todolist/screens/bottom_sheet_screen.dart';
+import 'package:todolist/models/task_data.dart';
+import 'package:todolist/screens/add_task_screen.dart';
 
-class TodoListScreen extends StatefulWidget {
-  @override
-  _TodoListScreenState createState() => _TodoListScreenState();
-}
-
-class _TodoListScreenState extends State<TodoListScreen> {
-  String typeTaskLabel;
-  TextEditingController _taskController = TextEditingController();
-
-  @override
-  void dispose() {
-    _taskController.dispose();
-    super.dispose();
-  }
-
+class TaskListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int taskLength = Provider.of<Tasks>(context).size();
+    int taskLength = Provider.of<TaskData>(context).taskCount;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -37,22 +22,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             ),
             context: context,
             builder: (BuildContext context) {
-              return BottomSheetScreen(
-                taskController: _taskController,
-                addTask: () {
-                  if (_taskController.text.length > 0) {
-                    setState(() {
-                      Provider.of<Tasks>(context, listen: false).addTask(
-                        Task(name: _taskController.text),
-                      );
-                    });
-                  }
-
-                  _taskController.clear();
-
-                  Navigator.pop(context);
-                },
-              );
+              return AddTaskScreen();
             },
             isScrollControlled: true,
           );
