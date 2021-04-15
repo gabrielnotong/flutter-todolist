@@ -16,13 +16,11 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: GestureDetector(
-        onLongPress: deleteCallback,
-        child: Text(
-          label,
-          style: TextStyle(
-            decoration: isChecked ? TextDecoration.lineThrough : null,
-          ),
+      onLongPress: deleteCallback,
+      title: Text(
+        label,
+        style: TextStyle(
+          decoration: isChecked ? TextDecoration.lineThrough : null,
         ),
       ),
       trailing: Checkbox(
